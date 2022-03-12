@@ -1,9 +1,9 @@
 ---
 collections:
   - name: community.general
-  - name: community.network
-  - name: ansible.posix
-  - name: fortinet.fortimanager
-  - name: fortinet.fortios
-    version: 1.1.7
+#  - name: community.network
+#  - name: ansible.posix
+#  - name: fortinet.fortimanager
+#  - name: fortinet.fortios
+#    version: 1.1.7
 ...

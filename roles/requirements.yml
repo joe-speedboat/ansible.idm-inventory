@@ -1,0 +1,8 @@
+---
+roles:
+  - src: https://github.com/joe-speedboat/ansible.ospatch.git
+    scm: git
+    version: master
+    name: joe-speedboat.ospatch
+...
+

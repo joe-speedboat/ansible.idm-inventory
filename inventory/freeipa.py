@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.8
 # This script uses the FreeIPA API to create an Ansible dynamic directory
 # This is a shell script version of freeipa-api-inv.py
 # 
@@ -130,19 +130,40 @@ elif args.list:
     for hostgroup in result:
         members = []
         children = []
+        ### avoid printing of empty hostgroups into inventory
+        if ('member_host' in hostgroup) or ('member_hostgroup' in hostgroup):
+            if 'member_host' in hostgroup:
+                members = [host for host in hostgroup['member_host']]
+            if 'member_hostgroup' in hostgroup:
+                children = hostgroup['member_hostgroup']
+                inventory[hostgroup['cn'][0]] = {
+                    'hosts': [host for host in members],
+                    'children': children
+                }
 
-        if 'member_host' in hostgroup:
-            members = [host for host in hostgroup['member_host']]
-        if 'member_hostgroup' in hostgroup:
-            children = hostgroup['member_hostgroup']
-        inventory[hostgroup['cn'][0]] = {
-            'hosts': [host for host in members],
-            'children': children
+            for member in members:
+                hostvars[member] = {}
+
+
+    ### Find hosts with no hostgroup membership ###
+    result = client._request(
+        'host_find',
+        '',
+        {'all': True, 'raw': False}
+    )['result']
+    no_hostgroup = []
+    for host in result:
+        if not 'memberofindirect_hostgroup' in host:
+            no_hostgroup.append(host['fqdn'][0])
+    ### inject hosts with no group membership into inventory
+    inventory['no_hostgroup'] = {
+        'hosts': no_hostgroup,
+        'children': []
         }
-
-        for member in members:
-            hostvars[member] = {}
-
+    ### inject hosts with no group membership into hostvars list
+    for no_hostgroup_host in no_hostgroup:
+        hostvars[no_hostgroup_host] = {}
+        
     inventory['_meta'] = {'hostvars': hostvars}
     inv_string = json.dumps(inventory, indent=1, sort_keys=True)
     print(inv_string)

@@ -136,10 +136,10 @@ elif args.list:
                 members = [host for host in hostgroup['member_host']]
             if 'member_hostgroup' in hostgroup:
                 children = hostgroup['member_hostgroup']
-                inventory[hostgroup['cn'][0]] = {
-                    'hosts': [host for host in members],
-                    'children': children
-                }
+            inventory[hostgroup['cn'][0]] = {
+                'hosts': [host for host in members],
+		'children': children
+            }
 
             for member in members:
                 hostvars[member] = {}

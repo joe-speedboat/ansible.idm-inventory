@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.8
+#!/usr/bin/env python3
 # This script uses the FreeIPA API to create an Ansible dynamic directory
 # This is a shell script version of freeipa-api-inv.py
 # 

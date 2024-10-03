@@ -5,7 +5,7 @@ Not more, not less.
 ## HowTo use
 ### Create new Execution Environment
 * Name: Custom EE
-* Image: docker.io/christian773/ee-idm:0.2
+* Image: docker.io/christian773/ansible-ee:latest
 * Description: FreeIPA Python deps + Collections
 * Pull: Missing
 

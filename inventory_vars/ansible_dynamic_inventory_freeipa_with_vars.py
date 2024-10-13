@@ -30,7 +30,7 @@ from concurrent.futures import ThreadPoolExecutor
 import os
 import time
 
-read_vars_from_desc = False
+read_vars_from_desc = True
 cache_timeout = 3600
 cache_file = os.path.join(os.path.expanduser("~"), ".ansible_freeipa_inventory_cache")
 lock_file = os.path.join(os.path.expanduser("~"), ".ansible_freeipa_inventory.lock")

@@ -22,3 +22,7 @@ Not more, not less.
    freeipaserver: ipa-server.domain.local   
    freeipauser: ipa-ro-user   
    freeipapassword: ipa-ro-password   
+
+## inventory_vars
+This is a WIP project, I wanted to test if vars can get from FreeIPA comment field of a host or group.   
+That would make it more flexible and independent, its not finished yet!
